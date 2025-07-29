@@ -133,3 +133,7 @@ doctype_js = {
 # 	"Task": "frepple.task.get_dashboard_data"
 # }
 
+
+fixtures = [
+    {"doctype": "Workspace", "filters": {"name": "Frepple"}},
+]

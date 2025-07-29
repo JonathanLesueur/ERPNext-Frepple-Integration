@@ -14,6 +14,9 @@ class FreppleCustomPage {
 		this.currentPage = false;
 		this.wrapper = wrapper;
 		this.pageMain = $(page.main);
+		this.pageFrameBox = null;
+		this.listButton = null;
+		this.customPagesList = [];
 		this.pageAction = (
 			$(this.wrapper)
 				.find('div.page-head div.page-actions')
@@ -24,7 +27,14 @@ class FreppleCustomPage {
 	}
 
 	init() {
+		let boxElement = `<div id="frameBox" class="w-100"></div>`;
+		let listButtonElement = $(`<p id="list-button"></p>`);
+		$(listButtonElement).appendTo(this.pageMain);
+		$(boxElement).appendTo(this.pageMain);
+		this.listButton = $(this.pageMain).find('#list-button');
+		this.pageFrameBox = $(this.wrapper).find('#frameBox');
 		this.createSelectionField();
+		this.customPagesList = this.getCustomPages();
 	}
 
 	showIframe() {
@@ -62,6 +72,37 @@ class FreppleCustomPage {
 			},
 		});
 	}
+
+	createList(list) {
+		if (list.length > 0) {
+			let buttonColors = ['danger', 'primary', 'success', 'warning', 'info'];
+			list.forEach((page) => {
+				
+				const buttonItem = $(`<button class="btn btn-${buttonColors[Math.floor(Math.random() * (buttonColors.length - 0 + 1) + 0)]}" type="button" data-toggle="collapse" data-target="#${page.name.toLowerCase()}" aria-expanded="false" aria-controls="${page.name.toLowerCase()}">${page.name}</button>`);
+				buttonItem.on('click', () => {
+					this.pageName = page.name;
+					this.changeTitle(this.pageName +' '+ page.name);
+					this.showIframe();
+				});
+				$(buttonItem).appendTo(this.listButton);
+			});
+				
+				this.pageMain.append(buttonItem);
+		} else {
+			this.pageFrameBox.append('<div class="text-danger">Aucune page personnalisée disponible.</div>');
+		}
+
+	}
+
+	getCustomPages() {
+		return frappe.db.get_list('Frepple Custom Page Settings', {
+			'fields': ['name', 'expiration', 'url', 'iframe_height'],
+		}).then((data) => {
+			this.createList(data);
+			return data;
+		});
+	}
+
 
 	createSelectionField() {
 		// create page selection field
@@ -107,7 +148,7 @@ class FreppleCustomPage {
 		this.selectionField.$wrapper.css('text-align', 'left');
 	}
 
-	changeTitle() {
-		this.pageTitle.text(`${this.pageName}`);
+	changeTitle(localTitle = false) {
+		this.pageTitle.text(`${localTitle ?? this.pageName}`);
 	}
 }

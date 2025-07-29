@@ -1,4 +1,22 @@
 # ERPNext-Frepple Integration
+## Reprise du travail de msf4-0
+Dépôt Github Original : https://github.com/msf4-0/ERPNext-Frepple-Integration
+Dernière mise à jour : 2022
+
+## Corrections apportées
+### 29-07-2025
+
+- Adaptation de l'encodage du token JWT pour appel Frepple en l'adaptant à la syntaxe Python 3.
+- Ajout du champ "cost" au DocType "Frepple Item", caché.
+- Amélioration visuelle de la page "Frepple Custom Page" pour lister directement les Custom Pages créées.
+  - Un bouton est généré pour chaque page existante, il suffit de cliquer dessus pour en afficher l'iframe Frepple paramétrée associée.
+- Générer un workspace à l'installation de l'application afin d'en disposer dans le menu latéral ERPNext.
+
+## Corrections à venir
+
+- Surprise
+
+
 <a href="https://github.com/msf4-0/ERPNext-Frepple-Integration/blob/master/LICENSE">
     <img alt="GitHub" src="https://img.shields.io/github/license/msf4-0/ERPNext-Frepple-Integration.svg?color=blue">
 </a>

@@ -24,7 +24,7 @@ def get_iframe_url(pageName):
 	# doc.secret_key,    # The shared secret between frePPLe and your application
 	doc_2.secret_key,
 	algorithm='HS256'
-	).decode('ascii')
+	)
 
 	return {
 		'iframeHeight': doc.iframe_height,

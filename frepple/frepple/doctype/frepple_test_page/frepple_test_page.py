@@ -20,6 +20,6 @@ def get_iframe_url():
 	},
 	'%@mzit!i8b*$zc&6oev96=Sat Jan 22 13:48:30 UTC 2022',    # The shared secret between frePPLe and your application
 	algorithm='HS256'
-	).decode('ascii')
+	)
 
 	return WEBTOKEN

@@ -32,7 +32,7 @@ def get_iframe_url():
 	},
 	doc_2.secret_key, # The shared secret between frePPLe and your application
 	algorithm='HS256'
-	).decode('ascii')
+	)
 
 	print(doc.url + demand_to_show +'/?webtoken=' + WEBTOKEN)
 	return doc.url + demand_to_show +'/?webtoken=' + WEBTOKEN
